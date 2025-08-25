@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JK Connections - Em Construção</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #FFFFFF;
+            --text-dark: #2F2F2F;
+            --navy: #3A2D7D;
+            --gradient-start: #A030A0;
+            --gradient-end: #28C8F4;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            background: var(--primary-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background animado */
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .gradient-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float-gradient 15s ease-in-out infinite;
+        }
+
+        .gradient-circle:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            background: var(--gradient-start);
+            top: -200px;
+            left: -200px;
+            animation-duration: 20s;
+        }
+
+        .gradient-circle:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            background: var(--gradient-end);
+            bottom: -200px;
+            right: -200px;
+            animation-duration: 25s;
+            animation-delay: 5s;
+        }
+
+        .gradient-circle:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 30s;
+            animation-delay: 10s;
+        }
+
+        @keyframes float-gradient {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Container principal */
+        .construction-container {
+            text-align: center;
+            padding: 40px;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo animado */
+        .logo-construction {
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .pixel-burst {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .pixel {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            opacity: 0;
+            animation: pixel-float 3s ease-in-out infinite;
+        }
+
+        @keyframes pixel-float {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(var(--x), var(--y)) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(var(--x) * 2), calc(var(--y) * 2)) scale(0);
+            }
+        }
+
+        /* Animação de construção */
+        .building-animation {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .hexagon-builder {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hex-piece {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            opacity: 0.1;
+            animation: build-hex 2s ease-in-out infinite;
+        }
+
+        .hex-piece:nth-child(1) {
+            animation-delay: 0s;
+            transform: scale(0.3);
+        }
+
+        .hex-piece:nth-child(2) {
+            animation-delay: 0.5s;
+            transform: scale(0.5);
+        }
+
+        .hex-piece:nth-child(3) {
+            animation-delay: 1s;
+            transform: scale(0.7);
+        }
+
+        @keyframes build-hex {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(var(--scale, 0.5));
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+        }
+
+        /* Textos */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* Barra de progresso */
+        .progress-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 40px;
+            background: rgba(160, 48, 160, 0.1);
+            border-radius: 50px;
+            padding: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50px;
+            width: 0%;
+            animation: loading 3s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 0%; }
+        }
+
+        /* Email form */
+        .notify-form {
+            margin-top: 50px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .email-input {
+            padding: 15px 25px;
+            border: 2px solid rgba(160, 48, 160, 0.2);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Lato', sans-serif;
+            width: 300px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--gradient-start);
+            box-shadow: 0 0 20px rgba(160, 48, 160, 0.2);
+        }
+
+        .notify-button {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(160, 48, 160, 0.3);
+        }
+
+        .notify-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(160, 48, 160, 0.4);
+        }
+
+        /* Social links */
+        .social-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(160, 48, 160, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--gradient-start);
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Partículas flutuantes */
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float-up 10s linear infinite;
+        }
+
+        @keyframes float-up {
+            from {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 2rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .email-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background animado -->
+    <div class="animated-bg">
+        <div class="gradient-circle"></div>
+        <div class="gradient-circle"></div>
+        <div class="gradient-circle"></div>
+    </div>
+
+    <!-- Partículas flutuantes -->
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Container principal -->
+    <div class="construction-container">
+        <!-- Logo -->
+        <div class="logo-construction">
+            <div class="logo-text">JK CONNECTIONS</div>
+            <div class="pixel-burst" id="pixelBurst"></div>
+        </div>
+
+        <!-- Animação de construção -->
+        <div class="building-animation">
+            <div class="hexagon-builder">
+                <div class="hex-piece" style="--scale: 0.3"></div>
+                <div class="hex-piece" style="--scale: 0.5"></div>
+                <div class="hex-piece" style="--scale: 0.7"></div>
+            </div>
+        </div>
+
+        <!-- Textos -->
+        <h1>Estamos Construindo o Futuro</h1>
+        <p class="subtitle">
+            Nossa plataforma está sendo cuidadosamente desenvolvida para oferecer 
+            a você uma experiência verdadeiramente mágica em automação e tecnologia.
+        </p>
+
+        <!-- Barra de progresso -->
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- Formulário de notificação -->
+        <form class="notify-form" onsubmit="handleSubmit(event)">
+            <input 
+                type="email" 
+                class="email-input" 
+                placeholder="Seu melhor e-mail"
+                required
+            >
+            <button type="submit" class="notify-button">
+                Me Avise!
+            </button>
+        </form>
+
+        <!-- Links sociais -->
+        <div class="social-links">
+            <a href="#" class="social-link" title="LinkedIn">
+                <span>in</span>
+            </a>
+            <a href="#" class="social-link" title="Instagram">
+                <span>ig</span>
+            </a>
+            <a href="#" class="social-link" title="Email">
+                <span>@</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Criar pixels animados ao redor do logo
+        const pixelBurst = document.getElementById('pixelBurst');
+        for (let i = 0; i < 20; i++) {
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            const angle = (360 / 20) * i;
+            const radius = 60;
+            const x = Math.cos(angle * Math.PI / 180) * radius;
+            const y = Math.sin(angle * Math.PI / 180) * radius;
+            pixel.style.setProperty('--x', `${x}px`);
+            pixel.style.setProperty('--y', `${y}px`);
+            pixel.style.left = '50%';
+            pixel.style.top = '50%';
+            pixel.style.animationDelay = `${i * 0.1}s`;
+            pixelBurst.appendChild(pixel);
+        }
+
+        // Criar partículas flutuantes
+        const particlesContainer = document.getElementById('particles');
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+
+            // Remover partícula após animação
+            setTimeout(() => {
+                particle.remove();
+            }, 20000);
+        }
+
+        // Criar partículas periodicamente
+        setInterval(createParticle, 500);
+
+        // Criar partículas iniciais
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+
+        // Handler do formulário
+        function handleSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.email-input').value;
+            
+            // Aqui você pode adicionar a lógica para salvar o email
+            // Por enquanto, apenas mostra uma mensagem
+            const button = event.target.querySelector('.notify-button');
+            const originalText = button.textContent;
+            
+            button.textContent = 'Obrigado! ✨';
+            button.style.background = 'linear-gradient(135deg, #28C8F4, #A030A0)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+                event.target.reset();
+            }, 3000);
+        }
+
+        // Efeito de mouse parallax
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const circles = document.querySelectorAll('.gradient-circle');
+            circles.forEach((circle, index) => {
+                const speed = (index + 1) * 10;
+                circle.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
