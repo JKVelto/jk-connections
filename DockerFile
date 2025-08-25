@@ -1,2 +1,10 @@
-FROM nginx:alpine
-COPY . /usr/share/nginx/html
+FROM caddy:alpine
+
+# Copia o site
+COPY . /usr/share/caddy
+
+# Copia o Caddyfile de configuração
+COPY Caddyfile /etc/caddy/Caddyfile
+
+EXPOSE 80
+EXPOSE 443
