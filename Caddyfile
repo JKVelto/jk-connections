@@ -1,4 +1,4 @@
-jkconnections.site {
+:80 {
   root * /usr/share/caddy
   file_server
   encode gzip zstd
