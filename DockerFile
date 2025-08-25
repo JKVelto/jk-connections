@@ -1,5 +1,19 @@
 FROM nginx:alpine
-COPY . /usr/share/nginx/html/
-RUN rm /usr/share/nginx/html/Dockerfile
+
+# Remove default nginx files
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy your files
+COPY index.html /usr/share/nginx/html/
+COPY *.html /usr/share/nginx/html/
+COPY *.css /usr/share/nginx/html/
+COPY *.js /usr/share/nginx/html/
+
+# Ensure proper permissions
+RUN chmod -R 755 /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 80
+
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
